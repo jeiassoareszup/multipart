@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 @RestController
 public class TestController {
@@ -31,10 +32,11 @@ public class TestController {
                 "    }";
     }
 
+    @CrossOrigin
     @PostMapping("/rest/zoom/liveness")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void upload(@RequestParam("blob") MultipartFile[] zipPhotos) {
+    public void upload(@RequestPart("zoomSessionData") MultipartFile zipPhotos, @RequestPart("sessionId") String sessionId) {
         System.out.println("test");
-//        certibioService.uploadZip(zipPhotos);
+        certibioService.uploadZip(zipPhotos);
     }
 }
